@@ -2,18 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SimpleApp/Model/Models/ConsolidatedLocationDay+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:SimpleApp/Model/Models/ConsolidatedLocationDay+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:SimpleApp/Model/Models/LocationDay+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:SimpleApp/Model/Models/LocationDay+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:SimpleApp.xcodeproj">
    </FileRef>
    <FileRef
