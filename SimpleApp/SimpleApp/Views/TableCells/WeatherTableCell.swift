@@ -81,7 +81,7 @@ class WeatherTableCell: UITableViewCell {
         weatherIcon.setWeatherImage(for: iconType)
         weatherStateName.text = stateName
         temperatureDetails.addLineBreak(lineCount: 2)
-        temperatureDetails.text = "Temperature \(tempString)°C\n" + "Min - \(minTempString)°C  Max - \(maxTempString)°C"
+        temperatureDetails.text = "Temperature \(tempString)°C\n" + "Min \(minTempString)°C ~ Max \(maxTempString)°C"
         windCompass.text = "Accuracy  \(predictivenessString)%"
         windSpeed.text = "Wind Speed \(speedString) mph"
         windDirection.text = "Wind Direction \(compass), \(directionString)°"
