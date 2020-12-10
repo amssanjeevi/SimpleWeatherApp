@@ -11,7 +11,7 @@ import UIKit
 import CoreLocation
 
 protocol LocationSelectionDelegate {
-    func loadInfo(for selectedLocation: AnyObject)
+    func loadInfo(for selectedLocation: RecentSearches)
 }
 
 class HomeController: UIViewController {
@@ -23,7 +23,7 @@ class HomeController: UIViewController {
     var locationSelectionDelegate: LocationSelectionDelegate?
     let SimpleCellIdentifier = "SimpleTableCell"
     var searchTableArray: [AnyObject] = []
-    var recentSearches: [AnyObject] = []
+    var recentSearches: [RecentSearches] = []
     var nearestCities: [AnyObject] = []
     let locationManager = CLLocationManager()
     
@@ -127,23 +127,18 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-            case 0:
-                locationSelectionDelegate?.loadInfo(for: searchTableArray[indexPath.row])
-                DispatchQueue.main.async {
-                    self.addRecentSearches(data: self.searchTableArray[indexPath.row])
-                    self.setRecents()
-                    self.tableView.reloadData()
-                }
-            case 1:
-                locationSelectionDelegate?.loadInfo(for: nearestCities[indexPath.row])
-                DispatchQueue.main.async {
-                    self.addRecentSearches(data: self.nearestCities[indexPath.row])
-                    self.setRecents()
-                    self.tableView.reloadData()
-                }
+            case 0: self.loadNewInfo(data: searchTableArray[indexPath.row])
+            case 1: self.loadNewInfo(data: nearestCities[indexPath.row])
             case 2: locationSelectionDelegate?.loadInfo(for: recentSearches[indexPath.row])
             default: break
         }
+    }
+    
+    private func loadNewInfo(data: AnyObject) {
+        let recentLocation = self.addAndGetRecentSearches(data: data)
+        self.setRecents()
+        locationSelectionDelegate?.loadInfo(for: recentLocation)
+        DispatchQueue.main.async { self.tableView.reloadData() }
     }
 }
 
@@ -178,15 +173,22 @@ import CoreData
 
 extension HomeController {
     
-    func addRecentSearches(data: AnyObject) {
+    func addAndGetRecentSearches(data: AnyObject) -> RecentSearches {
         let woeid = data.value(forKey: "woeid") as? NSNumber ?? 0
-        let recents = Database.readData(entity: "RecentSearches", predicate: NSPredicate(format: "woeid == %@", woeid), sortDescriptors: nil, fetchLimit: nil) as! [RecentSearches]
-        guard recents.count == 0 else { return }
+        let recents = Database.readData(
+            entity: "RecentSearches",
+            predicate: QueryManager.shared.queryByWoeid(id: woeid),
+            sortDescriptors: nil,
+            fetchLimit: nil
+        ) as! [RecentSearches]
+        guard recents.count == 0 else { return recents.first! }
         let recentSearches = NSEntityDescription.insertNewObject(forEntityName: "RecentSearches", into: Database.childContext!) as! RecentSearches
         recentSearches.title = data.value(forKey: "title") as? String
         recentSearches.latt_long = data.value(forKey: "latt_long") as? String
         recentSearches.woeid = woeid
+        recentSearches.syncedDate = Common.shared.getDateStamp()
         Database.saveMasterContext()
+        return recentSearches
     }
     
     func setRecents() {

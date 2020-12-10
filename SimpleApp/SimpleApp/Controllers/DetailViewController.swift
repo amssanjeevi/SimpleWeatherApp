@@ -12,7 +12,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray: [AnyObject] = []
+    var dataArray: [OfflineLocations] = []
     let DetailCellIdentifier = "WeatherTableCell"
     override func viewDidLoad() {
         super.viewDidLoad()

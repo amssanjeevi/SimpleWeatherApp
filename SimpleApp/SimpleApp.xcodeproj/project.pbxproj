@@ -25,6 +25,15 @@
 		844510C725817895009ECD1D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844510C625817895009ECD1D /* UIImageView+Extensions.swift */; };
 		844510C825817895009ECD1D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844510C625817895009ECD1D /* UIImageView+Extensions.swift */; };
 		844510C925817895009ECD1D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844510C625817895009ECD1D /* UIImageView+Extensions.swift */; };
+		84B6A84C2582AE1E0047C8B0 /* QueryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A84B2582AE1E0047C8B0 /* QueryManager.swift */; };
+		84B6A84D2582AE1E0047C8B0 /* QueryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A84B2582AE1E0047C8B0 /* QueryManager.swift */; };
+		84B6A84E2582AE1E0047C8B0 /* QueryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A84B2582AE1E0047C8B0 /* QueryManager.swift */; };
+		84B6A8502582AF750047C8B0 /* OfflineLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A84F2582AF750047C8B0 /* OfflineLocations.swift */; };
+		84B6A8512582AF750047C8B0 /* OfflineLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A84F2582AF750047C8B0 /* OfflineLocations.swift */; };
+		84B6A8522582AF750047C8B0 /* OfflineLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A84F2582AF750047C8B0 /* OfflineLocations.swift */; };
+		84B6A8542582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */; };
+		84B6A8552582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */; };
+		84B6A8562582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */; };
 		84B81DA2258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
 		84B81DA3258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
 		84B81DA4258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
@@ -137,6 +146,9 @@
 		844510BE2581570C009ECD1D /* WeatherTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableCell.swift; sourceTree = "<group>"; };
 		844510C225815720009ECD1D /* WeatherTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherTableCell.xib; sourceTree = "<group>"; };
 		844510C625817895009ECD1D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		84B6A84B2582AE1E0047C8B0 /* QueryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryManager.swift; sourceTree = "<group>"; };
+		84B6A84F2582AF750047C8B0 /* OfflineLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineLocations.swift; sourceTree = "<group>"; };
+		84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineLocationProperties.swift; sourceTree = "<group>"; };
 		84B81DA1258202F600E4D16B /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		84C9EC5B258111E50015005C /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		84C9EC6025811EC60015005C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -328,6 +340,7 @@
 				84DBA7AF25810C020022A000 /* Icomoon.swift */,
 				84C9EC6C258129350015005C /* Common.swift */,
 				84B81DA1258202F600E4D16B /* PermissionManager.swift */,
+				84B6A84B2582AE1E0047C8B0 /* QueryManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -370,6 +383,8 @@
 			children = (
 				844510B5258144C6009ECD1D /* Models */,
 				84C9EC5B258111E50015005C /* Database.swift */,
+				84B6A84F2582AF750047C8B0 /* OfflineLocations.swift */,
+				84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -615,12 +630,14 @@
 				84DBA7A22580F45B0022A000 /* DetailViewController.swift in Sources */,
 				84DBA7922580EC990022A000 /* UILabel+Extension.swift in Sources */,
 				84C9EC7125812EF60015005C /* ReachabilityManager.swift in Sources */,
+				84B6A8502582AF750047C8B0 /* OfflineLocations.swift in Sources */,
 				84DBA77D2580E9CD0022A000 /* Constants.swift in Sources */,
 				84DBA79A2580F13C0022A000 /* UIViewController+Extensions.swift in Sources */,
 				844510C725817895009ECD1D /* UIImageView+Extensions.swift in Sources */,
 				84C9EC69258122CC0015005C /* Data+Extensions.swift in Sources */,
 				84DBA7372580B0A00022A000 /* AppDelegate.swift in Sources */,
 				84DBA73F2580B0A00022A000 /* SimpleApp.xcdatamodeld in Sources */,
+				84B6A84C2582AE1E0047C8B0 /* QueryManager.swift in Sources */,
 				84DBA76F2580D7220022A000 /* HomeController.swift in Sources */,
 				84C9EC65258121E50015005C /* SessionManager.swift in Sources */,
 				84B81DA2258202F600E4D16B /* PermissionManager.swift in Sources */,
@@ -631,6 +648,7 @@
 				84C9EC6125811EC60015005C /* NetworkManager.swift in Sources */,
 				844510B8258144E8009ECD1D /* RecentSearches+CoreDataProperties.swift in Sources */,
 				84DBA78E2580EBD30022A000 /* SimpleTableCell.swift in Sources */,
+				84B6A8542582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */,
 				84C9EC5C258111E50015005C /* Database.swift in Sources */,
 				84DBA7962580F0C80022A000 /* ContainerController.swift in Sources */,
 			);
@@ -648,12 +666,14 @@
 				84DBA74F2580B0A30022A000 /* SimpleAppTests.swift in Sources */,
 				84C9EC6225811EC60015005C /* NetworkManager.swift in Sources */,
 				84DBA7972580F0C80022A000 /* ContainerController.swift in Sources */,
+				84B6A8512582AF750047C8B0 /* OfflineLocations.swift in Sources */,
 				84C9EC7725812F3B0015005C /* Notifier.swift in Sources */,
 				84DBA79B2580F13C0022A000 /* UIViewController+Extensions.swift in Sources */,
 				844510C825817895009ECD1D /* UIImageView+Extensions.swift in Sources */,
 				84C9EC66258121E50015005C /* SessionManager.swift in Sources */,
 				84DBA7B125810C020022A000 /* Icomoon.swift in Sources */,
 				84C9EC5D258111E50015005C /* Database.swift in Sources */,
+				84B6A84D2582AE1E0047C8B0 /* QueryManager.swift in Sources */,
 				84C9EC7B25812F840015005C /* UIView+Extensions.swift in Sources */,
 				84C9EC7F25812F900015005C /* UIButton+Extensions.swift in Sources */,
 				84B81DA3258202F600E4D16B /* PermissionManager.swift in Sources */,
@@ -664,6 +684,7 @@
 				84DBA7832580EB710022A000 /* SimpleHeader.swift in Sources */,
 				844510B9258144E8009ECD1D /* RecentSearches+CoreDataProperties.swift in Sources */,
 				84DBA7A32580F45B0022A000 /* DetailViewController.swift in Sources */,
+				84B6A8552582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */,
 				84DBA78F2580EBD30022A000 /* SimpleTableCell.swift in Sources */,
 				84DBA77E2580E9CD0022A000 /* Constants.swift in Sources */,
 			);
@@ -681,12 +702,14 @@
 				84DBA75A2580B0A30022A000 /* SimpleAppUITests.swift in Sources */,
 				84C9EC6325811EC60015005C /* NetworkManager.swift in Sources */,
 				84DBA7982580F0C80022A000 /* ContainerController.swift in Sources */,
+				84B6A8522582AF750047C8B0 /* OfflineLocations.swift in Sources */,
 				84C9EC7825812F3B0015005C /* Notifier.swift in Sources */,
 				84DBA79C2580F13C0022A000 /* UIViewController+Extensions.swift in Sources */,
 				844510C925817895009ECD1D /* UIImageView+Extensions.swift in Sources */,
 				84C9EC67258121E50015005C /* SessionManager.swift in Sources */,
 				84DBA7B225810C020022A000 /* Icomoon.swift in Sources */,
 				84C9EC5E258111E50015005C /* Database.swift in Sources */,
+				84B6A84E2582AE1E0047C8B0 /* QueryManager.swift in Sources */,
 				84C9EC7C25812F840015005C /* UIView+Extensions.swift in Sources */,
 				84C9EC8025812F900015005C /* UIButton+Extensions.swift in Sources */,
 				84B81DA4258202F600E4D16B /* PermissionManager.swift in Sources */,
@@ -697,6 +720,7 @@
 				84DBA7842580EB710022A000 /* SimpleHeader.swift in Sources */,
 				844510BA258144E8009ECD1D /* RecentSearches+CoreDataProperties.swift in Sources */,
 				84DBA7A42580F45B0022A000 /* DetailViewController.swift in Sources */,
+				84B6A8562582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */,
 				84DBA7902580EBD30022A000 /* SimpleTableCell.swift in Sources */,
 				84DBA77F2580E9CD0022A000 /* Constants.swift in Sources */,
 			);

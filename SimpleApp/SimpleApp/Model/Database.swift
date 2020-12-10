@@ -120,4 +120,48 @@ extension Database {
             print(error.localizedDescription)
         }
     }
+    
+    static func deleteObjects(objects: [AnyObject]) {
+        objects.forEach { childContext?.delete($0 as! NSManagedObject) }
+        saveMasterContext()
+    }
+    
+    static func writeDataTo(entity: String, data: AnyObject) -> NSManagedObject? {
+        guard let dataDictionary = data as? [String: Any?] else { return nil }
+        guard !dataDictionary.isEmpty else { return nil }
+        let newEntity = NSEntityDescription.insertNewObject(forEntityName: entity, into: childContext!)
+        for (key, value) in dataDictionary {
+            if value is [String: Any?] {
+                
+            } else if value is Array<Any> {
+                
+            } else if value != nil {
+                insertData(into: newEntity, key: key, value: value!)
+            }
+        }
+        return newEntity
+    }
+    
+    private static func insertData(into entity: NSManagedObject, key: String, value: Any) {
+        guard let attributeDescription = entity.entity.propertiesByName[key] as? NSAttributeDescription
+        else { return }
+        entity.setValue(getDecodedData(value: value, attributeDescription: attributeDescription), forKey: key)
+    }
+    
+    private static func setParentChildAssociation(childEntity: NSManagedObject, parentEntity: NSManagedObject, key: String) {
+        parentEntity.setValue(childEntity, forKey: key)
+    }
+    
+    private static func getDecodedData(value: Any, attributeDescription: NSAttributeDescription) -> Any {
+        if value is NSNull {
+            return NSNull()
+        }
+        if value is String && (value as? String)?.count == 0 {
+            return NSNull()
+        }
+        if attributeDescription.attributeType == NSAttributeType.doubleAttributeType || attributeDescription.attributeType == NSAttributeType.floatAttributeType || attributeDescription.attributeType == NSAttributeType.decimalAttributeType {
+            return NSDecimalNumber(string: Common.shared.roundOffTo(digits: 2, value: value))
+        }
+        return value
+    }
 }

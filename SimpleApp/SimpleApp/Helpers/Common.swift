@@ -25,6 +25,19 @@ class Common {
         return Calendar.current.startOfDay(for: date)
     }
     
+    func getDateStamp() -> String {
+        let dateFormatter = getDateFormatter()
+        dateFormatter.dateFormat = Constants.DateFormats.Format1
+        return dateFormatter.string(from: Date())
+    }
+    
+    func isMatchesTodayDate(date: String) -> Bool {
+        let formatter = getDateFormatter()
+        formatter.dateFormat = Constants.DateFormats.Format1
+        let today = formatter.string(from: Date())
+        return date == today
+    }
+    
     func getDateByAddingComponents(days: Int, toDate: Date) -> Date {
         var components = DateComponents()
         components.day = days
@@ -32,11 +45,8 @@ class Common {
     }
     
     func getFormattedDate(inputFormat: String, outputFormat: String, dateString: String) -> String {
-        let inputFormatter = DateFormatter()
-        let outputFormatter = DateFormatter()
-        let locale = Locale(identifier: "en_US_POSIX")
-        inputFormatter.locale = locale
-        outputFormatter.locale = locale
+        let inputFormatter = getDateFormatter()
+        let outputFormatter = getDateFormatter()
         inputFormatter.dateFormat = inputFormat
         outputFormatter.dateFormat = outputFormat
         let inputDate = inputFormatter.date(from: dateString)
@@ -50,5 +60,35 @@ class Common {
             return outputFormatter.string(from: formattedDate)
         }
         return ""
+    }
+    
+    private func getDateFormatter() -> DateFormatter {
+        let dateFormatter = DateFormatter()
+        let locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.locale = locale
+        return dateFormatter
+    }
+    
+    func roundOffTo(digits: Int, value: Any) -> String {
+        let formatter = getRoundOffFormatter(format: getFormat(digitCount: digits))
+        formatter.maximumFractionDigits = digits
+        formatter.minimumFractionDigits = digits
+        return formatter.string(from: value as! NSNumber)!
+    }
+    
+    private func getRoundOffFormatter(format: String) -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.numberStyle = .none
+        formatter.positiveFormat = format
+        formatter.negativeFormat = format
+        formatter.decimalSeparator = "."
+        formatter.usesGroupingSeparator = false
+        formatter.roundingMode = .halfUp
+        return formatter
+    }
+    
+    private func getFormat(digitCount: Int) -> String {
+        return "0." + String(repeating: "#", count: digitCount)
     }
 }

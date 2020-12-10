@@ -46,55 +46,36 @@ class WeatherTableCell: UITableViewCell {
         visibility.dynamicDetailTheme(fontSize: Constants.FontSize.SmallSize)
     }
     
-    func updateViewDetails(data: AnyObject) {
-        let stateName = data.value(forKey: "weather_state_name") as? String ?? ""
-        let iconType = data.value(forKey: "weather_state_abbr") as? String ?? ""
-        let compass = data.value(forKey: "wind_direction_compass") as? String ?? ""
-        let date = data.value(forKey: "applicable_date") as? String ?? ""
-        let minTemp = data.value(forKey: "min_temp") as? Double ?? 0
-        let maxTemp = data.value(forKey: "max_temp") as? Double ?? 0
-        let temp = data.value(forKey: "the_temp") as? Double ?? 0
-        let speed = data.value(forKey: "wind_speed") as? Double ?? 0
-        let direction = data.value(forKey: "wind_direction") as? Double ?? 0
-        let pressure = data.value(forKey: "air_pressure") as? Double ?? 0
-        let humidness = data.value(forKey: "humidity") as? Double ?? 0
-        let visibleness = data.value(forKey: "visibility") as? Double ?? 0
-        let predictiveness = data.value(forKey: "predictability") as? Double ?? 0
-        var tempString = String(format: "%.2f", temp)
-        if tempString.contains(".00") { tempString = String(tempString.dropLast(3)) }
-        var minTempString = String(format: "%.2f", minTemp)
-        if minTempString.contains(".00") { minTempString = String(minTempString.dropLast(3)) }
-        var maxTempString = String(format: "%.2f", maxTemp)
-        if maxTempString.contains(".00") { maxTempString = String(maxTempString.dropLast(3)) }
-        var speedString = String(format: "%.2f", speed)
-        if speedString.contains(".00") { speedString = String(speedString.dropLast(3)) }
-        var directionString = String(format: "%.2f", direction)
-        if directionString.contains(".00") { directionString = String(directionString.dropLast(3)) }
-        var pressureString = String(format: "%.2f", pressure)
-        if pressureString.contains(".00") { pressureString = String(pressureString.dropLast(3)) }
-        var humidnessString = String(format: "%.2f", humidness)
-        if humidnessString.contains(".00") { humidnessString = String(humidnessString.dropLast(3)) }
-        var visiblenessString = String(format: "%.2f", visibleness)
-        if visiblenessString.contains(".00") { visiblenessString = String(visiblenessString.dropLast(3)) }
-        var predictivenessString = String(format: "%.2f", predictiveness)
-        if predictivenessString.contains(".00") { predictivenessString = String(predictivenessString.dropLast(3)) }
-        weatherDate.text = Common.shared.getFormattedDate(
-            inputFormat: Constants.DateFormats.Format1,
-            outputFormat: Constants.DateFormats.Format2,
-            dateString: date
-        )
-//        weatherStateIcon.setIconTitle(identifier: iconType)
-        weatherIcon.setWeatherImage(for: iconType)
-        weatherStateName.text = stateName
-        temperatureDetails.addLineBreak(lineCount: 2)
-        temperatureDetails.text = "Temperature \(tempString)°C"
-        minMaxTemperature.text = "Min \(minTempString)°C ~ Max \(maxTempString)°C"
-        windCompass.text = "Accuracy  \(predictivenessString)%"
-        windSpeed.text = "Wind Speed \(speedString) mph"
-        windDirection.text = "Wind Direction \(compass), \(directionString)°"
-        airPressure.text = "Air Pressure \(pressureString) mbar"
-        humidity.text = "Humidity \(humidnessString)%"
-        visibility.text = "Visibility \(visiblenessString) miles"
+    func updateViewDetails(data: OfflineLocations) {
+        DispatchQueue.main.async {
+            let iconType = data.weather_state_abbr ?? ""
+            let temperatureData = data.the_temp ?? 0
+            let windCompassData = data.wind_direction_compass ?? ""
+            let minTemperatureData = data.min_temp ?? 0
+            let maxTemperatureData = data.max_temp ?? 0
+            let windSpeedData = data.wind_speed ?? 0
+            let windDirectionData = data.wind_direction ?? 0
+            let airPressureData = data.air_pressure ?? 0
+            let humidityData = data.humidity ?? 0
+            let visibilityData = data.visibility ?? 0
+            let predictabilityData = data.predictability ?? 0
+            
+            self.weatherDate.text = Common.shared.getFormattedDate(
+                inputFormat: Constants.DateFormats.Format1,
+                outputFormat: Constants.DateFormats.Format2,
+                dateString: data.applicable_date ?? ""
+            )
+            self.weatherIcon.setWeatherImage(for: iconType)
+            self.weatherStateName.text = data.weather_state_name ?? ""
+            self.temperatureDetails.text = "Temperature \(temperatureData)°C"
+            self.minMaxTemperature.text = "Min \(minTemperatureData)°C ~ Max \(maxTemperatureData)°C"
+            self.windCompass.text = "Accuracy  \(predictabilityData)%"
+            self.windSpeed.text = "Wind Speed \(windSpeedData) mph"
+            self.windDirection.text = "Wind Direction \(windCompassData), \(windDirectionData)°"
+            self.airPressure.text = "Air Pressure \(airPressureData) mbar"
+            self.humidity.text = "Humidity \(humidityData)%"
+            self.visibility.text = "Visibility \(visibilityData) miles"
+        }
         
     }
     
