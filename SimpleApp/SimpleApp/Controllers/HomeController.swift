@@ -38,6 +38,7 @@ class HomeController: UIViewController {
         tableView.applyDetailViewTheme()
         locationButton.setLocationIcon()
         locationButton.applyCircularRadius()
+        searchBar.becomeFirstResponder()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -132,6 +133,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             case 2: locationSelectionDelegate?.loadInfo(for: recentSearches[indexPath.row])
             default: break
         }
+        view.endEditing(true)
     }
     
     private func loadNewInfo(data: AnyObject) {
