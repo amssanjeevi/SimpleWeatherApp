@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ConsolidatedLocationDay" representedClassName="ConsolidatedLocationDay" syncable="YES" codeGenerationType="class">
+        <attribute name="air_pressure" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="applicable_date" optional="YES" attributeType="String"/>
+        <attribute name="humidity" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="max_temp" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="min_temp" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="predictability" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="the_temp" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="visibility" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="weather_state_abbr" optional="YES" attributeType="String"/>
+        <attribute name="weather_state_name" optional="YES" attributeType="String"/>
+        <attribute name="wind_direction" optional="YES" attributeType="String"/>
+        <attribute name="wind_direction_compass" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="wind_speed" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="locationDay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationDay" inverseName="consolidatedLocationDay" inverseEntity="LocationDay"/>
+    </entity>
+    <entity name="LocationDay" representedClassName="LocationDay" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="woeid" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="consolidatedLocationDay" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ConsolidatedLocationDay" inverseName="locationDay" inverseEntity="ConsolidatedLocationDay"/>
+    </entity>
     <entity name="RecentSearches" representedClassName=".RecentSearches" syncable="YES">
-        <attribute name="latt_long" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="woeid" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latt_long" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="woeid" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="RecentSearches" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="LocationDay" positionX="-63" positionY="9" width="128" height="88"/>
+        <element name="ConsolidatedLocationDay" positionX="-54" positionY="18" width="128" height="253"/>
     </elements>
 </model>
