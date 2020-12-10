@@ -16,7 +16,9 @@ class DetailViewController: UIViewController {
     let DetailCellIdentifier = "WeatherTableCell"
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.setDefaultsForTableView(cellHeight: Constants.Size.DetailCellHeight)
+        tableView.setDefaultsForTableView(
+            cellHeight: UIDevice.current.userInterfaceIdiom == .pad ? Constants.Size.DetailCellHeightPad : Constants.Size.DetailCellHeightPhone
+        )
         tableView.registerTableCell(for: DetailCellIdentifier)
         view.applyDetailViewTheme()
         tableView.applyDetailViewTheme()

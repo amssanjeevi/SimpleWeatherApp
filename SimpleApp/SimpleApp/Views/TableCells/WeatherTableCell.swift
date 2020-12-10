@@ -16,22 +16,28 @@ class WeatherTableCell: UITableViewCell {
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var weatherStateName: UILabel!
     @IBOutlet weak var temperatureDetails: UILabel!
-    @IBOutlet weak var windCompass: UILabel!
-    @IBOutlet weak var windSpeed: UILabel!
-    @IBOutlet weak var windDirection: UILabel!
-    @IBOutlet weak var airPressure: UILabel!
-    @IBOutlet weak var humidity: UILabel!
-    @IBOutlet weak var visibility: UILabel!
+    @IBOutlet weak var minMaxTemperature: UILabel!
+    @IBOutlet weak var leftStack: UIStackView!
+    @IBOutlet weak var rightStack: UIStackView!
+    
+    var windCompass: UILabel = UILabel()
+    var windSpeed: UILabel = UILabel()
+    var windDirection: UILabel = UILabel()
+    var airPressure: UILabel = UILabel()
+    var humidity: UILabel = UILabel()
+    var visibility: UILabel = UILabel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
         contentView.applyDetailViewTheme()
         applyDetailViewTheme()
+        updateLabelsBasedOnDevice()
         weatherDate.dynamicTitleTheme(fontSize: Constants.FontSize.VeryLargeFont)
         weatherStateIcon.dynamicTitleTheme(fontSize: Constants.FontSize.IconSize)
         weatherStateName.dynamicTitleTheme(fontSize: Constants.FontSize.StandardHeaderSize)
         temperatureDetails.dynamicDetailTheme(fontSize: Constants.FontSize.SmallSize)
+        minMaxTemperature.dynamicDetailTheme(fontSize: Constants.FontSize.SmallSize)
         windCompass.dynamicDetailTheme(fontSize: Constants.FontSize.SmallSize)
         windSpeed.dynamicDetailTheme(fontSize: Constants.FontSize.SmallSize)
         windDirection.dynamicDetailTheme(fontSize: Constants.FontSize.SmallSize)
@@ -81,7 +87,8 @@ class WeatherTableCell: UITableViewCell {
         weatherIcon.setWeatherImage(for: iconType)
         weatherStateName.text = stateName
         temperatureDetails.addLineBreak(lineCount: 2)
-        temperatureDetails.text = "Temperature \(tempString)°C\n" + "Min \(minTempString)°C ~ Max \(maxTempString)°C"
+        temperatureDetails.text = "Temperature \(tempString)°C"
+        minMaxTemperature.text = "Min \(minTempString)°C ~ Max \(maxTempString)°C"
         windCompass.text = "Accuracy  \(predictivenessString)%"
         windSpeed.text = "Wind Speed \(speedString) mph"
         windDirection.text = "Wind Direction \(compass), \(directionString)°"
@@ -89,5 +96,29 @@ class WeatherTableCell: UITableViewCell {
         humidity.text = "Humidity \(humidnessString)%"
         visibility.text = "Visibility \(visiblenessString) miles"
         
+    }
+    
+    func updateLabelsBasedOnDevice() {
+        guard UIDevice.current.userInterfaceIdiom == .pad else {
+            setLabelsForPhoneDisplay()
+            return
+        }
+        setLabelsForPadDisplay()
+    }
+    
+    func setLabelsForPadDisplay() {
+        [windSpeed, airPressure, humidity].forEach { (label) in
+            leftStack.addArrangedSubview(label)
+        }
+        [windDirection, visibility, windCompass].forEach { (label) in
+            rightStack.addArrangedSubview(label)
+        }
+    }
+    
+    func setLabelsForPhoneDisplay() {
+        rightStack.isHidden = true
+        [windSpeed, windDirection, airPressure, visibility, humidity, windCompass].forEach { (label) in
+            leftStack.addArrangedSubview(label)
+        }
     }
 }

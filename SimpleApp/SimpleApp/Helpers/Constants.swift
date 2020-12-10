@@ -25,7 +25,8 @@ struct Constants {
         static let BorderWidth: CGFloat = 1
         static let StandardCornerRadius: CGFloat = 4
         static let FooterToastHeight: CGFloat = 30
-        static let DetailCellHeight: CGFloat = 250
+        static let DetailCellHeightPad: CGFloat = 250
+        static let DetailCellHeightPhone: CGFloat = 300
     }
     
     struct FontSize {
