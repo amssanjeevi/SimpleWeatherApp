@@ -27,8 +27,8 @@
         <attribute name="woeid" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="RecentSearches" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="LocationDay" positionX="-63" positionY="9" width="128" height="88"/>
         <element name="ConsolidatedLocationDay" positionX="-54" positionY="18" width="128" height="253"/>
+        <element name="LocationDay" positionX="-63" positionY="9" width="128" height="88"/>
+        <element name="RecentSearches" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>
