@@ -21,7 +21,7 @@ class Notifier: UIViewController {
     
     func showAlert(alertTitle: String, message: String, firstButtonTitle: String, secondButtonTitle: String? = nil, firstAction: (() -> Void)? = nil, secondAction: (() -> Void)? = nil) {
         let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
-        let firstButton = UIAlertAction(title: firstButtonTitle, style: .cancel) { (action) in
+        let firstButton = UIAlertAction(title: firstButtonTitle, style: .default) { (action) in
             self.dismiss(animated: true, completion: nil)
             if let firstAction = firstAction { firstAction() }
         }

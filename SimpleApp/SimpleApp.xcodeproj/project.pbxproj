@@ -25,6 +25,9 @@
 		844510C725817895009ECD1D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844510C625817895009ECD1D /* UIImageView+Extensions.swift */; };
 		844510C825817895009ECD1D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844510C625817895009ECD1D /* UIImageView+Extensions.swift */; };
 		844510C925817895009ECD1D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844510C625817895009ECD1D /* UIImageView+Extensions.swift */; };
+		84B81DA2258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
+		84B81DA3258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
+		84B81DA4258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
 		84C9EC5C258111E50015005C /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9EC5B258111E50015005C /* Database.swift */; };
 		84C9EC5D258111E50015005C /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9EC5B258111E50015005C /* Database.swift */; };
 		84C9EC5E258111E50015005C /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9EC5B258111E50015005C /* Database.swift */; };
@@ -135,6 +138,7 @@
 		844510BE2581570C009ECD1D /* WeatherTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableCell.swift; sourceTree = "<group>"; };
 		844510C225815720009ECD1D /* WeatherTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherTableCell.xib; sourceTree = "<group>"; };
 		844510C625817895009ECD1D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		84B81DA1258202F600E4D16B /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		84C9EC5B258111E50015005C /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		84C9EC6025811EC60015005C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		84C9EC64258121E50015005C /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				84DBA77C2580E9CD0022A000 /* Constants.swift */,
 				84DBA7AF25810C020022A000 /* Icomoon.swift */,
 				84C9EC6C258129350015005C /* Common.swift */,
+				84B81DA1258202F600E4D16B /* PermissionManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 				84DBA73F2580B0A00022A000 /* SimpleApp.xcdatamodeld in Sources */,
 				84DBA76F2580D7220022A000 /* HomeController.swift in Sources */,
 				84C9EC65258121E50015005C /* SessionManager.swift in Sources */,
+				84B81DA2258202F600E4D16B /* PermissionManager.swift in Sources */,
 				84DBA7822580EB710022A000 /* SimpleHeader.swift in Sources */,
 				844510BB258144E8009ECD1D /* RecentSearches+CoreDataClass.swift in Sources */,
 				844510BF2581570C009ECD1D /* WeatherTableCell.swift in Sources */,
@@ -651,6 +657,7 @@
 				84C9EC5D258111E50015005C /* Database.swift in Sources */,
 				84C9EC7B25812F840015005C /* UIView+Extensions.swift in Sources */,
 				84C9EC7F25812F900015005C /* UIButton+Extensions.swift in Sources */,
+				84B81DA3258202F600E4D16B /* PermissionManager.swift in Sources */,
 				84C9EC6A258122CC0015005C /* Data+Extensions.swift in Sources */,
 				844510BC258144E8009ECD1D /* RecentSearches+CoreDataClass.swift in Sources */,
 				844510C02581570C009ECD1D /* WeatherTableCell.swift in Sources */,
@@ -683,6 +690,7 @@
 				84C9EC5E258111E50015005C /* Database.swift in Sources */,
 				84C9EC7C25812F840015005C /* UIView+Extensions.swift in Sources */,
 				84C9EC8025812F900015005C /* UIButton+Extensions.swift in Sources */,
+				84B81DA4258202F600E4D16B /* PermissionManager.swift in Sources */,
 				84C9EC6B258122CC0015005C /* Data+Extensions.swift in Sources */,
 				844510BD258144E8009ECD1D /* RecentSearches+CoreDataClass.swift in Sources */,
 				844510C12581570C009ECD1D /* WeatherTableCell.swift in Sources */,

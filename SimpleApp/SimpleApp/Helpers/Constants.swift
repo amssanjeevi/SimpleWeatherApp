@@ -26,7 +26,7 @@ struct Constants {
         static let StandardCornerRadius: CGFloat = 4
         static let FooterToastHeight: CGFloat = 30
         static let DetailCellHeightPad: CGFloat = 250
-        static let DetailCellHeightPhone: CGFloat = 300
+        static let DetailCellHeightPhone: CGFloat = 250
     }
     
     struct FontSize {
@@ -37,6 +37,7 @@ struct Constants {
         static let LargeFont: CGFloat = 18
         static let VeryLargeFont: CGFloat = 20
         static let IconSize: CGFloat = 50
+        static let ButtonIconSize: CGFloat = 20
     }
     
     struct Colors {
@@ -47,6 +48,9 @@ struct Constants {
         static let Overlay: UIColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
         static let DetailTheme: UIColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1.0)
         static let SpinnerBackground: UIColor = UIColor(red: 130/255, green: 130/255, blue: 130/255, alpha: 1.0)
+        static let PrimaryButton: UIColor = UIColor(red: 0/255, green: 118/255, blue: 237/255, alpha: 1.0)
+        static let PrimaryButtonDisabled: UIColor = UIColor(red: 0/255, green: 118/255, blue: 237/255, alpha: 0.8)
+        static let ShadowColor: UIColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
     }
     
     struct UrlsExtensions {

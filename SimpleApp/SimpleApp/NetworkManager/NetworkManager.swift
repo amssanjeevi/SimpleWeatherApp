@@ -26,4 +26,10 @@ class NetworkManager {
         let url = baseUrl + Constants.UrlsExtensions.whereOnEarthQuery + String(woeId)
         SessionsManager.shared.GET(urlString: url, success: success)
     }
+    
+    func searchByLatLong(lattitude: String, longitude: String, success: Success?) {
+        guard Reachability.shared.isReachable() else { return }
+        let url = baseUrl + Constants.UrlsExtensions.LocationQueryByCoordinates + "\(lattitude),\(longitude)"
+        SessionsManager.shared.GET(urlString: url, success: success)
+    }
 }

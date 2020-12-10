@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeController" customModule="SimpleApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeController" customModule="Buzz_Weather" customModuleProvider="target">
             <connections>
+                <outlet property="locationButton" destination="3nj-H9-1gN" id="UAz-OK-Mme"/>
                 <outlet property="searchBar" destination="mgF-uI-iYj" id="N9Y-N0-qbR"/>
                 <outlet property="tableView" destination="ICK-0J-Z08" id="F8i-Jg-Y7C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="iUn-1Z-0wh"/>
@@ -22,17 +21,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Enter City Name" translatesAutoresizingMaskIntoConstraints="NO" id="mgF-uI-iYj">
-                    <rect key="frame" x="0.0" y="30" width="375" height="56"/>
+                    <rect key="frame" x="0.0" y="0.0" width="327" height="70"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="56" id="7fw-gM-FmO"/>
+                        <constraint firstAttribute="height" constant="70" id="7fw-gM-FmO"/>
                     </constraints>
                     <textInputTraits key="textInputTraits" textContentType="location"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="fti-J2-QVQ"/>
                     </connections>
                 </searchBar>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nj-H9-1gN">
+                    <rect key="frame" x="327" y="16" width="38" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="2Ff-hm-9lD"/>
+                        <constraint firstAttribute="width" secondItem="3nj-H9-1gN" secondAttribute="height" multiplier="1:1" id="Y47-yC-Gzh"/>
+                    </constraints>
+                    <connections>
+                        <action selector="locationPressed:" destination="-1" eventType="touchUpInside" id="WCz-aw-mly"/>
+                    </connections>
+                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ICK-0J-Z08">
-                    <rect key="frame" x="0.0" y="86" width="375" height="581"/>
+                    <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="eVw-SU-Tlk"/>
@@ -44,13 +53,16 @@
             <constraints>
                 <constraint firstItem="ICK-0J-Z08" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0yL-JO-f0a"/>
                 <constraint firstItem="ICK-0J-Z08" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="1Qq-c2-ybj"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mgF-uI-iYj" secondAttribute="trailing" id="3Nc-9v-kLT"/>
-                <constraint firstItem="mgF-uI-iYj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="3Qs-4X-NhK"/>
+                <constraint firstItem="3nj-H9-1gN" firstAttribute="leading" secondItem="mgF-uI-iYj" secondAttribute="trailing" id="3Nc-9v-kLT"/>
+                <constraint firstItem="mgF-uI-iYj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="3Qs-4X-NhK"/>
                 <constraint firstItem="mgF-uI-iYj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="JdH-NB-JkD"/>
                 <constraint firstItem="mgF-uI-iYj" firstAttribute="bottom" secondItem="ICK-0J-Z08" secondAttribute="top" id="JuC-bD-udW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3nj-H9-1gN" secondAttribute="trailing" constant="10" id="bVW-gz-T3J"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ICK-0J-Z08" secondAttribute="trailing" id="eTv-W1-ukR"/>
+                <constraint firstItem="3nj-H9-1gN" firstAttribute="centerY" secondItem="mgF-uI-iYj" secondAttribute="centerY" id="fFM-Lo-0D9"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-158" y="9"/>
         </view>
     </objects>
 </document>

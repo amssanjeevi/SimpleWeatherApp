@@ -50,5 +50,7 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use this permission to get the weather info at user&apos;s location.</string>
 </dict>
 </plist>

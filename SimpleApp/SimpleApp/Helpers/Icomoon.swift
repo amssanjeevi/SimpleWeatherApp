@@ -10,7 +10,7 @@ import UIKit
 
 class IconFont: UIFont {
     
-    enum Icon: String {
+    enum WeatherIcon: String {
         case Snow = "sn"
         case Sleet = "sl"
         case Hail = "h"
@@ -23,9 +23,13 @@ class IconFont: UIFont {
         case Clear = "c"
     }
     
+    enum Icon: Int {
+        case Location = 0
+    }
+    
     static let shared = IconFont()
     
-    func getFont(for iconName: Icon) -> String {
+    func getWeatherIconFont(for iconName: WeatherIcon) -> String {
         
         switch iconName {
         case .Snow: return "\u{e97b}"
@@ -41,7 +45,7 @@ class IconFont: UIFont {
         }
     }
     
-    func getFont(for iconName: Icon) -> UIImage? {
+    func getWeatherIcon(for iconName: WeatherIcon) -> UIImage? {
         
         switch iconName {
         case .Snow: return UIImage(named: "snow")
@@ -54,6 +58,12 @@ class IconFont: UIFont {
         case .HeavyCloud: return UIImage(named: "heavycloud")
         case .LightCloud: return UIImage(named: "lightcloud")
         case .Clear: return UIImage(named: "clear")
+        }
+    }
+    
+    func getIconFont(for fontName: Icon) -> String {
+        switch fontName {
+            case .Location: return "\u{e900}"
         }
     }
 }

@@ -33,9 +33,9 @@ extension UILabel {
     }
     
     func setIconTitle(identifier: String) {
-        let fontName = IconFont.Icon.init(rawValue: identifier)!
+        let fontName = IconFont.WeatherIcon.init(rawValue: identifier)!
         setIconFont()
-        text = IconFont.shared.getFont(for: fontName)
+        text = IconFont.shared.getWeatherIconFont(for: fontName)
         textAlignment = .center
     }
     

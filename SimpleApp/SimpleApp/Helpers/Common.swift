@@ -17,6 +17,10 @@ class Common {
         return UINib(nibName: nibName, bundle: Bundle.main).instantiate(withOwner: nil, options: nil)[0] as! UIView
     }
     
+    func bundleId() -> String {
+        return Bundle.main.bundleIdentifier ?? ""
+    }
+    
     func startOfDay(date: Date) -> Date {
         return Calendar.current.startOfDay(for: date)
     }

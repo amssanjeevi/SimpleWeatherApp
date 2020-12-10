@@ -99,10 +99,10 @@ class WeatherTableCell: UITableViewCell {
     }
     
     func updateLabelsBasedOnDevice() {
-        guard UIDevice.current.userInterfaceIdiom == .pad else {
-            setLabelsForPhoneDisplay()
-            return
-        }
+//        guard UIDevice.current.userInterfaceIdiom == .pad else {
+//            setLabelsForPhoneDisplay()
+//            return
+//        }
         setLabelsForPadDisplay()
     }
     

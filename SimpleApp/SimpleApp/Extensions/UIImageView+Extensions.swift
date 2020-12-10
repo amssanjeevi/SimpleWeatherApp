@@ -12,8 +12,8 @@ import UIKit
 extension UIImageView {
     
     func setWeatherImage(for identifier: String) {
-        let imageName = IconFont.Icon.init(rawValue: identifier)
-        image = IconFont.shared.getFont(for: imageName!)
+        let imageName = IconFont.WeatherIcon.init(rawValue: identifier)
+        image = IconFont.shared.getWeatherIcon(for: imageName!)
         contentMode = .scaleAspectFit
     }
 }

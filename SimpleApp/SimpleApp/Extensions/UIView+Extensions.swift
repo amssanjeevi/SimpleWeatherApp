@@ -43,6 +43,11 @@ extension UIView {
             self.frame = secondPosition
         }, completion: completion)
     }
+    
+    func applyCircularRadius() {
+        layer.cornerRadius = frame.height/2
+        clipsToBounds = true
+    }
 }
 
 import SnapKit
@@ -51,23 +56,23 @@ extension UIView {
     
     func spinnerConstraints(spinner: UIView, label: UIView) {
         spinner.snp.makeConstraints { (make) in
-            make.width.equalTo(75)
-            make.height.equalTo(75)
+            make.top.equalTo(snp.top).offset(30)
             make.centerX.equalTo(snp.centerX)
-            make.top.equalTo(snp.top).offset(10)
+            make.width.equalTo(snp.width).dividedBy(2.5)
+            make.height.equalTo(snp.height).dividedBy(2.5)
         }
         label.snp.makeConstraints { (make) in
-            make.width.equalTo(snp.width)
+            make.width.equalTo(snp.width).offset(-20)
             make.height.equalTo(20)
             make.centerX.equalTo(snp.centerX)
-            make.top.equalTo(spinner.snp.bottom).offset(5)
+            make.bottom.equalTo(snp.bottom).offset(-20)
         }
     }
     
     func spinnerBackGroundConstraints(background: UIView) {
         background.snp.makeConstraints { (make) in
-            make.width.equalTo(120)
-            make.height.equalTo(120)
+            make.width.equalTo(160)
+            make.height.equalTo(150)
             make.centerX.equalTo(snp.centerX)
             make.centerY.equalTo(snp.centerY)
         }
