@@ -81,6 +81,7 @@ extension ContainerViewController: LocationSelectionDelegate {
                 return first.applicable_date?.compare(next.applicable_date ?? "", options: .anchored) == ComparisonResult.orderedAscending
             })
             self.detailController.title = title
+            self.detailController.tableView.reloadData()
             self.homeNavigation.pushViewController(self.detailController, animated: true)
         }
     }
