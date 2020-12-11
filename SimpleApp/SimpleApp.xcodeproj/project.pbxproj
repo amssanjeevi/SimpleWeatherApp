@@ -34,6 +34,9 @@
 		84B6A8542582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */; };
 		84B6A8552582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */; };
 		84B6A8562582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */; };
+		84B6A858258376E50047C8B0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A857258376E50047C8B0 /* StorageManager.swift */; };
+		84B6A859258376E50047C8B0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A857258376E50047C8B0 /* StorageManager.swift */; };
+		84B6A85A258376E50047C8B0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A857258376E50047C8B0 /* StorageManager.swift */; };
 		84B81DA2258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
 		84B81DA3258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
 		84B81DA4258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
@@ -149,6 +152,7 @@
 		84B6A84B2582AE1E0047C8B0 /* QueryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryManager.swift; sourceTree = "<group>"; };
 		84B6A84F2582AF750047C8B0 /* OfflineLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineLocations.swift; sourceTree = "<group>"; };
 		84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineLocationProperties.swift; sourceTree = "<group>"; };
+		84B6A857258376E50047C8B0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		84B81DA1258202F600E4D16B /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		84C9EC5B258111E50015005C /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		84C9EC6025811EC60015005C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 				84C9EC6C258129350015005C /* Common.swift */,
 				84B81DA1258202F600E4D16B /* PermissionManager.swift */,
 				84B6A84B2582AE1E0047C8B0 /* QueryManager.swift */,
+				84B6A857258376E50047C8B0 /* StorageManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 				844510B8258144E8009ECD1D /* RecentSearches+CoreDataProperties.swift in Sources */,
 				84DBA78E2580EBD30022A000 /* SimpleTableCell.swift in Sources */,
 				84B6A8542582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */,
+				84B6A858258376E50047C8B0 /* StorageManager.swift in Sources */,
 				84C9EC5C258111E50015005C /* Database.swift in Sources */,
 				84DBA7962580F0C80022A000 /* ContainerController.swift in Sources */,
 			);
@@ -685,6 +691,7 @@
 				844510B9258144E8009ECD1D /* RecentSearches+CoreDataProperties.swift in Sources */,
 				84DBA7A32580F45B0022A000 /* DetailViewController.swift in Sources */,
 				84B6A8552582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */,
+				84B6A859258376E50047C8B0 /* StorageManager.swift in Sources */,
 				84DBA78F2580EBD30022A000 /* SimpleTableCell.swift in Sources */,
 				84DBA77E2580E9CD0022A000 /* Constants.swift in Sources */,
 			);
@@ -721,6 +728,7 @@
 				844510BA258144E8009ECD1D /* RecentSearches+CoreDataProperties.swift in Sources */,
 				84DBA7A42580F45B0022A000 /* DetailViewController.swift in Sources */,
 				84B6A8562582AFB80047C8B0 /* OfflineLocationProperties.swift in Sources */,
+				84B6A85A258376E50047C8B0 /* StorageManager.swift in Sources */,
 				84DBA7902580EBD30022A000 /* SimpleTableCell.swift in Sources */,
 				84DBA77F2580E9CD0022A000 /* Constants.swift in Sources */,
 			);
