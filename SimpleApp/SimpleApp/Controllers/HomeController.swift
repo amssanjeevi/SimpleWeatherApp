@@ -50,6 +50,9 @@ class HomeController: UIViewController {
             DispatchQueue.main.async {
                 guard CLLocationManager.locationServicesEnabled() else { return }
                 self.locationManager.startUpdatingLocation()
+                self.searchBar.text = ""
+                self.searchTableArray = []
+                self.searchBar.resignFirstResponder()
             }
         }
     }
