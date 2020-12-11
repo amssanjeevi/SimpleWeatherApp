@@ -42,6 +42,7 @@ class HomeController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        informEditingStyle()
     }
     
     @IBAction func locationPressed(_ sender: UIButton) {
@@ -126,6 +127,18 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard indexPath.section == 2 && indexPath.row == 0 else { return }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return indexPath.section == 2 ? .delete : .none
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        deleteRecentData(at: indexPath.row)
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
             case 0: self.loadNewInfo(data: searchTableArray[indexPath.row])
@@ -141,6 +154,25 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         self.setRecents()
         locationSelectionDelegate?.loadInfo(for: recentLocation)
         DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+    
+    private func deleteRecentData(at index: Int) {
+        Database.deleteObjects(objects: [recentSearches[index]])
+        recentSearches.remove(at: index)
+        Database.saveMasterContext()
+        tableView.reloadData()
+    }
+    
+    private func informEditingStyle() {
+        let isInformed = StorageManager.shared.getStoredData(for: StorageManager.shared.isEditingStyleShown)
+        guard isInformed == nil && recentSearches.count > 0 else { return }
+        StorageManager.shared.storeUserDefaults(value: true, for: StorageManager.shared.isEditingStyleShown)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0)) {
+            self.tableView.setEditing(true, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                self.tableView.setEditing(false, animated: true)
+            }
+        }
     }
 }
 
@@ -184,13 +216,10 @@ extension HomeController {
             fetchLimit: nil
         ) as! [RecentSearches]
         guard recents.count == 0 else { return recents.first! }
-        let recentSearches = NSEntityDescription.insertNewObject(forEntityName: "RecentSearches", into: Database.childContext!) as! RecentSearches
-        recentSearches.title = data.value(forKey: "title") as? String
-        recentSearches.latt_long = data.value(forKey: "latt_long") as? String
-        recentSearches.woeid = woeid
-        recentSearches.syncedDate = Common.shared.getDateStamp()
+        let newRecents = Database.writeDataTo(entity: "RecentSearches", data: data) as! RecentSearches
+        newRecents.syncedDate = Common.shared.getDateStamp()
         Database.saveMasterContext()
-        return recentSearches
+        return newRecents
     }
     
     func setRecents() {
