@@ -14,7 +14,7 @@
         <attribute name="wind_direction" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="wind_direction_compass" optional="YES" attributeType="String"/>
         <attribute name="wind_speed" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
-        <relationship name="recentSearches" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RecentSearches" inverseName="offlineLocations" inverseEntity="RecentSearches"/>
+        <relationship name="recentSearches" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecentSearches" inverseName="offlineLocations" inverseEntity="RecentSearches"/>
     </entity>
     <entity name="RecentSearches" representedClassName=".RecentSearches" syncable="YES">
         <attribute name="latt_long" optional="YES" attributeType="String"/>
