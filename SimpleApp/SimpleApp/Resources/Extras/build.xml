@@ -1,0 +1,230 @@
+<project default="deployRelease" basedir="." name="ZohoPOS_iOS">
+    <property environment="env"/>
+    <property file="ant.properties"/>
+    <property name="local.projectPath" value="${basedir}"/>
+    <property name="local.ipaPath" value="${basedir}/artifacts"/>
+    <property name="remote.host" value=""/>
+    <property name="remote.user" value=""/>
+    <property name="remote.password" value=""/>
+    <property name="remote.path" value=""/>
+    <property name="app.id" value="ZohoPos"/>
+    <property name="app.hash" value=""/>
+    <property name="xcode.dir" value="/Applications/Xcode_10.1.app/Contents/Developer/usr/bin"/>
+    <property name="workspace" value="${local.projectPath}/project.xcworkspace"/>
+    <target name="init">
+        <!-- Create the time stamp -->
+        <tstamp>
+            <format property="year.month.date" pattern="yyyy-MM-dd"/>
+            <format property="touch.build.date" pattern="ddMMyyyy"/>
+        </tstamp>
+        <property url="http://posdownloads/pos/downloads/Admin/auth.properties" prefix="ref.pass"/>
+        <property name="ftp.password" value="${ref.pass.login.auth}"/>
+    </target>
+    
+    
+    <target name="buildAndPackage" depends="update_deps,provideImage">
+        <exec executable="security" failonerror="true">
+            <arg value="unlock-keychain"/>
+            <arg value="-p"/>
+            <arg value="${local.keychain.password}"/>
+            <arg value="/Users/${local.user}/Library/Keychains/login.keychain"/>
+        </exec>
+        <delete dir="build"/>
+        <exec executable="${xcode.dir}/xcodebuild" failonerror="true">
+            <arg value="clean"/>
+        </exec>
+        <exec executable="${xcode.dir}/xcodebuild" failonerror="true">
+            <arg value="-workspace"/>
+            <arg value="${local.projectPath}/${app.id}.xcworkspace"/>
+            <arg value="-scheme"/>
+            <arg value="SellQuick"/>
+            <arg value="-configuration"/>
+            <arg value="${configuration}"/>
+            <arg value="archive"/>
+            <arg value="-archivePath"/>
+            <arg value="${local.projectPath}/build/${configuration}-iphoneos/${app.id}.xcarchive"/>
+        </exec>
+        <exec executable="xcodebuild" failonerror="true">
+            <arg value="-exportArchive"/>
+            <arg value="-archivePath"/>
+            <arg value="${local.projectPath}/build/${configuration}-iphoneos/${app.id}.xcarchive"/>
+            <arg value="-exportPath"/>
+            <arg value="${local.ipaPath}/${app.id}-${version}"/>
+            <arg value="-exportOptionsPlist"/>
+            <arg value="${exportPlistFile}"/>
+        </exec>
+    </target>
+    
+    <target name="deployRelease">
+        <delete dir="${basedir}/artifacts"/>
+        <mkdir dir="${basedir}/artifacts"/>
+        <antcall target="get_pod"/>
+        
+        <antcall target="buildAndPackage">
+            <param name="version" value="Adhoc"/>
+            <param name="configuration" value="Adhoc"/>
+            <param name="exportPlistFile" value="${local.projectPath}/exportAdhocPlist.plist"/>
+        </antcall>
+        
+        <replaceregexp match="IsProduction: Bool = false" replace="IsProduction: Bool = true" flags="g" byline="true">
+            <fileset dir="SellQuick/Helpers/Constants" includes="Constants.swift"/>
+        </replaceregexp>
+        
+        <antcall target="buildAndPackage">
+            <param name="version" value="Release"/>
+            <param name="configuration" value="Release"/>
+            <param name="exportPlistFile" value="${local.projectPath}/exportReleasePlist.plist"/>
+        </antcall>
+    </target>
+    
+    <target name="ios_upload_ftp" >
+        <property url="http://posdownloads/pos/downloads/Admin/auth.properties" prefix="ref.pass"/>
+        <property name="ftp.password" value="${ref.pass.login.auth}"/>
+        
+        <ftp action="mkdir" server="posdownloads"  userid="web" password="${ftp.password}"
+            remotedir="/home/web/html/pos/downloads/MobileApp/SellQuick_iOS/Daily/${year.month.date}">
+        </ftp>
+        
+        <ftp server="posdownloads"
+            remotedir="/home/web/html/pos/downloads/MobileApp/SellQuick_iOS/Daily/${year.month.date}"
+            userid="web"
+            password="${ftp.password}"
+            passive="yes"
+            newer="no"
+            binary="yes">
+            <fileset dir="${local.ipaPath}/${app.id}-Adhoc">
+                <include name="${app.id}.ipa"/>
+            </fileset>
+        </ftp>
+    </target>
+    
+    <target name="upload_release">
+        <property url="http://posdownloads/pos/downloads/Admin/auth.properties" prefix="ref.pass"/>
+        <property name="ftp.password" value="${ref.pass.login.auth}"/>
+        
+        <ftp action="mkdir" server="posdownloads"  userid="web" password="${ftp.password}"
+            remotedir="/home/web/html/pos/downloads/MobileApp/SellQuick_iOS/Release/${RELEASE_VERSION}">
+        </ftp>
+        
+        <ftp server="posdownloads"
+            remotedir="/home/web/html/pos/downloads/MobileApp/SellQuick_iOS/Release/${RELEASE_VERSION}"
+            userid="web"
+            password="${ftp.password}"
+            passive="yes"
+            newer="no"
+            binary="yes">
+            <fileset dir="${local.ipaPath}/${app.id}-Release">
+                <include name="${app.id}.ipa"/>
+            </fileset>
+        </ftp>
+        
+        <antcall target="upload_app_center" />
+    </target>
+    
+    <target name="upload_app_center">
+        <exec dir="${basedir}" executable="sh" failonerror="yes">
+            <arg value="rel_ios.sh" />
+        </exec>
+    </target>
+    
+    
+    <target name="update_deps">
+        <property file="deps.properties"/>
+        <delete dir="cache"/>
+        <mkdir dir="cache"/>
+        
+        <!-- Barcode framework -->
+        <echo message="==========Get barcode framework========"/>
+        <delete dir="SellQuick/Libraries/Barcode.framework"/>
+        <get src="${deps.barcode}/Barcode.zip" dest="cache/Barcode.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/Barcode.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- Formatters framework -->
+        <echo message="==========Get formatters framework========"/>
+        <delete dir="SellQuick/Libraries/Formatters.framework"/>
+        <get src="${deps.formatters}/Formatters.zip" dest="cache/Formatters.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/Formatters.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- Sync Library -->
+        <echo message="==========Get sync library========"/>
+        <delete dir="SellQuick/Libraries/GFSyncLibrary"/>
+        <get src="${deps.syncLibrary}/GFSyncLibrary.zip" dest="cache/GFSyncLibrary.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/GFSyncLibrary.zip" dest="SellQuick/Libraries/GFSyncLibrary"/>
+        
+        <!-- MultiFunctionKeyboard framework -->
+        <echo message="==========Get multiFunctionKeyboard framework========"/>
+        <delete dir="SellQuick/Libraries/MultiFunctionKeyboard.framework"/>
+        <get src="${deps.multiFunctionKeyboard}/MultiFunctionKeyboard.zip" dest="cache/MultiFunctionKeyboard.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/MultiFunctionKeyboard.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- QuickAddCustomer framework -->
+        <echo message="==========Get quickAddCustomer framework========"/>
+        <delete dir="SellQuick/Libraries/QuickAddCustomer.framework"/>
+        <get src="${deps.quickAddCustomer}/QuickAddCustomer.zip" dest="cache/QuickAddCustomer.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/QuickAddCustomer.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- SessionManagement framework -->
+        <echo message="==========Get sessionManagement framework========"/>
+        <delete dir="SellQuick/Libraries/SessionManagement.framework"/>
+        <get src="${deps.sessionManagement}/SessionManagement.zip" dest="cache/SessionManagement.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/SessionManagement.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- Notifier framework -->
+        <echo message="==========Get notifier framework========"/>
+        <delete dir="SellQuick/Libraries/Notifier.framework"/>
+        <get src="${deps.notifier}/Notifier.zip" dest="cache/Notifier.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/Notifier.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- iOSRegistration framework -->
+        <echo message="==========Get registration framework========"/>
+        <delete dir="SellQuick/Libraries/iOSRegistration.framework"/>
+        <get src="${deps.iOSRegistration}/iOSRegistration.zip" dest="cache/iOSRegistration.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/iOSRegistration.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- GFPeripherals framework -->
+        <echo message="==========Get GFPeripherals framework========"/>
+        <delete dir="SellQuick/Libraries/GFPeripherals.framework"/>
+        <get src="${deps.GFPeripherals}/GFPeripherals.zip" dest="cache/GFPeripherals.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/GFPeripherals.zip" dest="SellQuick/Libraries/GFPeripherals"/>
+        
+        <!-- TenderManagement framework -->
+        <echo message="==========Get tenderManagement framework========"/>
+        <delete dir="SellQuick/Libraries/TenderManagement.framework"/>
+        <get src="${deps.tenderManagement}/TenderManagement.zip" dest="cache/TenderManagement.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/TenderManagement.zip" dest="SellQuick/Libraries"/>
+        
+        <!-- ReprintScreen framework -->
+        <echo message="==========Get ReprintScreenManagement framework========"/>
+        <delete dir="SellQuick/Libraries/ReprintScreenManagement.framework"/>
+        <get src="${deps.ReprintScreenManagement}/ReprintScreenManagement.zip" dest="cache/ReprintScreenManagement.zip" verbose="yes" usetimestamp="true"/>
+        <unzip src="cache/ReprintScreenManagement.zip" dest="SellQuick/Libraries"/>
+        
+    </target>
+    
+    <target name="provideImage">
+        <echo message="Providing Image for ${app.id}"/>
+        <copy todir="SellQuick/Assets.xcassets" overwrite="true">
+            <fileset dir="SellQuick/Resources/ImageProvider/${app.id}ImageSet"/>
+        </copy>
+    </target>
+    
+    <target name="updatePodForScheme" if="${is.app.SellQuick}">
+        <replaceregexp match="pod 'SSOKit'" replace="#pod 'SSOKit'" flags="g" byline="true">
+            <fileset dir="SellQuick/.." includes="Podfile"/>
+        </replaceregexp>
+        <replaceregexp match="source 'https://git.csez.zohocorpin.com/zoho/zohopodspecs.git'" replace="#source 'https://git.csez.zohocorpin.com/zoho/zohopodspecs.git'" flags="g" byline="true">
+            <fileset dir="SellQuick/.." includes="Podfile"/>
+        </replaceregexp>
+    </target>
+    
+    <condition property="is.app.SellQuick">
+        <equals arg1="${app.id}" arg2="SellQuick"/>
+    </condition>
+    
+    <target name="get_pod" depends="updatePodForScheme">
+        <exec executable="pod" dir="${basedir}" failonerror="true">
+            <!--<arg value="_1.1.1_"/>-->
+            <arg value="install"/>
+        </exec>
+    </target>
+</project>

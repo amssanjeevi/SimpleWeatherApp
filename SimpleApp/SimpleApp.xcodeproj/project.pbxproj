@@ -37,6 +37,9 @@
 		84B6A858258376E50047C8B0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A857258376E50047C8B0 /* StorageManager.swift */; };
 		84B6A859258376E50047C8B0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A857258376E50047C8B0 /* StorageManager.swift */; };
 		84B6A85A258376E50047C8B0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A857258376E50047C8B0 /* StorageManager.swift */; };
+		84B6A85C2583EE2F0047C8B0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A85B2583EE2F0047C8B0 /* MenuViewController.swift */; };
+		84B6A85D2583EE2F0047C8B0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A85B2583EE2F0047C8B0 /* MenuViewController.swift */; };
+		84B6A85E2583EE2F0047C8B0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A85B2583EE2F0047C8B0 /* MenuViewController.swift */; };
 		84B81DA2258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
 		84B81DA3258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
 		84B81DA4258202F600E4D16B /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81DA1258202F600E4D16B /* PermissionManager.swift */; };
@@ -153,6 +156,7 @@
 		84B6A84F2582AF750047C8B0 /* OfflineLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineLocations.swift; sourceTree = "<group>"; };
 		84B6A8532582AFB80047C8B0 /* OfflineLocationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineLocationProperties.swift; sourceTree = "<group>"; };
 		84B6A857258376E50047C8B0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		84B6A85B2583EE2F0047C8B0 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		84B81DA1258202F600E4D16B /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		84C9EC5B258111E50015005C /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		84C9EC6025811EC60015005C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -379,6 +383,7 @@
 				84DBA7732580E0A60022A000 /* HomeController.xib */,
 				84DBA7A12580F45B0022A000 /* DetailViewController.swift */,
 				84DBA79D2580F44B0022A000 /* DetailViewController.xib */,
+				84B6A85B2583EE2F0047C8B0 /* MenuViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				84DBA7B025810C020022A000 /* Icomoon.swift in Sources */,
 				84DBA7A22580F45B0022A000 /* DetailViewController.swift in Sources */,
 				84DBA7922580EC990022A000 /* UILabel+Extension.swift in Sources */,
+				84B6A85C2583EE2F0047C8B0 /* MenuViewController.swift in Sources */,
 				84C9EC7125812EF60015005C /* ReachabilityManager.swift in Sources */,
 				84B6A8502582AF750047C8B0 /* OfflineLocations.swift in Sources */,
 				84DBA77D2580E9CD0022A000 /* Constants.swift in Sources */,
@@ -671,6 +677,7 @@
 				84DBA7702580D7220022A000 /* HomeController.swift in Sources */,
 				84DBA74F2580B0A30022A000 /* SimpleAppTests.swift in Sources */,
 				84C9EC6225811EC60015005C /* NetworkManager.swift in Sources */,
+				84B6A85D2583EE2F0047C8B0 /* MenuViewController.swift in Sources */,
 				84DBA7972580F0C80022A000 /* ContainerController.swift in Sources */,
 				84B6A8512582AF750047C8B0 /* OfflineLocations.swift in Sources */,
 				84C9EC7725812F3B0015005C /* Notifier.swift in Sources */,
@@ -708,6 +715,7 @@
 				84DBA7712580D7220022A000 /* HomeController.swift in Sources */,
 				84DBA75A2580B0A30022A000 /* SimpleAppUITests.swift in Sources */,
 				84C9EC6325811EC60015005C /* NetworkManager.swift in Sources */,
+				84B6A85E2583EE2F0047C8B0 /* MenuViewController.swift in Sources */,
 				84DBA7982580F0C80022A000 /* ContainerController.swift in Sources */,
 				84B6A8522582AF750047C8B0 /* OfflineLocations.swift in Sources */,
 				84C9EC7825812F3B0015005C /* Notifier.swift in Sources */,
