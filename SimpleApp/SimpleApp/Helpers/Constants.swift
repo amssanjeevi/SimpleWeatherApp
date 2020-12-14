@@ -14,6 +14,11 @@ struct Constants {
         static let Icomoon = "icomoon"
     }
     
+    struct Entity {
+        static let RecentSearches = "RecentSearches"
+        static let OfflineLocations = "OfflineLocations"
+    }
+    
     struct TimeLimits {
         static let RequestTimeOut: TimeInterval = 30
         static let QuickAnimate: TimeInterval = 0.1

@@ -213,20 +213,28 @@ extension HomeController {
     func addAndGetRecentSearches(data: AnyObject) -> RecentSearches {
         let woeid = data.value(forKey: "woeid") as? NSNumber ?? 0
         let recents = Database.readData(
-            entity: "RecentSearches",
+            entity: Constants.Entity.RecentSearches,
             predicate: QueryManager.shared.queryByWoeid(id: woeid),
             sortDescriptors: nil,
             fetchLimit: nil
         ) as! [RecentSearches]
         guard recents.count == 0 else { return recents.first! }
-        let newRecents = Database.writeDataTo(entity: "RecentSearches", data: data) as! RecentSearches
+        let newRecents = Database.writeDataTo(
+            entity: Constants.Entity.RecentSearches,
+            data: data
+        ) as! RecentSearches
         newRecents.syncedDate = Common.shared.getDateStamp()
         Database.saveMasterContext()
         return newRecents
     }
     
     func setRecents() {
-        let recents = Database.readData(entity: "RecentSearches", predicate: nil, sortDescriptors: nil, fetchLimit: nil) as! [RecentSearches]
+        let recents = Database.readData(
+            entity: Constants.Entity.RecentSearches,
+            predicate: nil,
+            sortDescriptors: nil,
+            fetchLimit: nil
+        ) as! [RecentSearches]
         recentSearches = recents
     }
 }

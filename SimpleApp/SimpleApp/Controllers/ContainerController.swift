@@ -88,7 +88,10 @@ extension ContainerViewController: LocationSelectionDelegate {
     
     private func addToOfflineData(dataArray: [AnyObject], parent: RecentSearches) {
         for data in dataArray {
-            let entity = Database.writeDataTo(entity: "OfflineLocations", data: data) as? OfflineLocations
+            let entity = Database.writeDataTo(
+                entity: Constants.Entity.OfflineLocations,
+                data: data
+            ) as? OfflineLocations
             entity?.recentSearches = parent
         }
         Database.saveMasterContext()
